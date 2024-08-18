@@ -190,4 +190,32 @@ class VoterCandidateController extends Controller
             return $this->sendErrorResponse('internal servererror', 500);
         }
     }
+
+    //for testing purposes candidate data
+    public function storeTestData(Request $request)
+    {
+        // dd($request->all());
+        $imagePath = null;
+
+        if ($request->hasFile('candidate_image')) {
+            $imagePath = $request->file('candidate_image')->store('candidate_images', 'public'); // Adjust storage path as needed
+        }
+
+        $candidate = VoterCandidate::create([
+            'candidate_name' => $request->name,
+            'dob' => $request->dob,
+            'candidate_image' => $imagePath ? 'storage/' . $imagePath : null,
+            'birth_place' => $request->birth_place,
+            'occupation' => $request->occupation,
+            'occupation_1' => $request->occupation_1,
+            'position' => $request->position,
+            'position_1' => $request->position_1,
+            'votter_party_id' => $request->votter_party_id,
+            'order' => $request->order,
+        ]);
+        return $response()->json(['message' => 'sucessful',
+            'data' => $candidate,
+        ], 200);
+        // return redirect('admin/candidate')->with('success', 'Candidate created successfully.');
+    }
 }

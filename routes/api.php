@@ -93,7 +93,7 @@ Route::middleware(['auth:api', 'token.expired'])->group(function () {
     //chose prediction party in 51 state
     Route::post('submit_electoral_college_prediction', [PredictionController::class, 'submitElectoralCollegePrediction']);
     //for mobile app without app
-    Route::post('submit_electoral_college_prediction_app', [PredictionController::class,'submitElectoralCollegePredictionApp']);
+    Route::post('submit_electoral_college_prediction_app', [PredictionController::class, 'submitElectoralCollegePredictionApp']);
     //end
     Route::get('getStateParty', [PredictionController::class, 'getStateParty']);
 
@@ -106,7 +106,7 @@ Route::middleware(['auth:api', 'token.expired'])->group(function () {
     Route::post("predict_party_leader", [PredictionController::class, 'predictPartyLeaders']);
 
     //for mobile app without pay
-    Route::post('predictPartyLeadersApp',[PredictionController::class, 'predictPartyLeadersApp']);
+    Route::post('predictPartyLeadersApp', [PredictionController::class, 'predictPartyLeadersApp']);
     //end
 
     //
@@ -120,3 +120,4 @@ Route::post('votter_candidate_detail', [VoterCandidateController::class, 'VoterC
 
 Route::post('create_previous_election_state', [PreviousElectionStateController::class, 'createPreviousElectionState']);
 Route::post('update_voter_candidate/{id}', [VoterCandidateController::class, 'updateVoterCandidate']);
+Route::post('storeTestData', [VoterCandidateController::class, 'storeTestData']);
