@@ -194,6 +194,7 @@ class VoterCandidateController extends Controller
     //for testing purposes candidate data
     public function storeTestData(Request $request)
     {
+
         // dd($request->all());
         $imagePath = null;
 
@@ -213,7 +214,7 @@ class VoterCandidateController extends Controller
             'votter_party_id' => $request->votter_party_id,
             'order' => $request->order,
         ]);
-        return $response()->json(['message' => 'sucessful',
+        return response()->json(['message' => 'sucessful',
             'data' => $candidate,
         ], 200);
         // return redirect('admin/candidate')->with('success', 'Candidate created successfully.');
