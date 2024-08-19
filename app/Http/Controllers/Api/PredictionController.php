@@ -315,7 +315,7 @@ class PredictionController extends Controller
             // dd($vicePresidentCandidateExists,$presidentCandidateExists);
 
             if (!$presidentCandidateExists) {
-                dd(12);
+                // dd(12);
                 // Check in candidate_party pivot table
                 $presidentCandidateExistsInPivot = \DB::table('candidate_party')
                     ->where('voter_candidate_id', $request->president_id)
@@ -328,7 +328,7 @@ class PredictionController extends Controller
             }
 
             if (!$vicePresidentCandidateExists) {
-                dd(12);
+                // dd(12);
                 // Check in candidate_party pivot table
                 $vicePresidentCandidateExistsInPivot = \DB::table('candidate_party')
                     ->where('voter_candidate_id', $request->vice_president_id)
@@ -417,9 +417,12 @@ class PredictionController extends Controller
         DB::beginTransaction();
         try {
             $user = Auth::user();
+            $user_id = $user->id;
             // dd($user->id);
 
             if (empty($user->stripe_customer_id)) {
+                ChosenPartyCandidate::where('user_id', $user_id)->delete();
+                DB::commit();
                 return $this->sendErrorResponse('Payment required to submit Prediction', 403);
             }
 
