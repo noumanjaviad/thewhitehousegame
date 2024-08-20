@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateUserInfoRequest;
 use App\Models\User;
-use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Database\QueryException;
+use Illuminate\Foundation\Bus\Dispatchable;
+use App\Http\Requests\UpdateUserInfoRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
 
 class UserController extends Controller
 {
